@@ -8,7 +8,7 @@ Project: Dodge Balls
 
 How to install and run the project
 
-  	After you fork this file, you can play the game in new_ball.py files
+  	After you fork this file, you can play the game in new_ball.py files. To get better information, watch video from the link below. 
 
 Usage
 
