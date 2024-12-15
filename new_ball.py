@@ -41,6 +41,8 @@ class BouncingSimulator:
         wn.setup(width = SCREEN_WIDTH + 50, height = SCREEN_HEIGHT + 100) # My edit
         wn.title("My Game") # my edit
 
+##### Custom #####
+
       # Draw the star
 
         for i in range(5):
@@ -62,7 +64,9 @@ class BouncingSimulator:
         self.screen = turtle.Screen()
         self.screen.bgcolor("Black")
 
-        ball_radius = 0.03 * self.canvas_width
+#############################
+
+        ball_radius = 0.04 * self.canvas_width
         for i in range(self.num_balls):
             x = -self.canvas_width + (i+1)*(2*self.canvas_width/(self.num_balls+1))
             # y = 0.0
@@ -111,7 +115,7 @@ class BouncingSimulator:
 
     def create_ball(self, num_balls):
         self.num_balls = num_balls
-        ball_radius = 0.03 * self.canvas_width
+        ball_radius = 0.04 * self.canvas_width
         for i in range(self.num_balls):
             x = -self.canvas_width + (i+1)*(2*self.canvas_width/(self.num_balls+1))
             y = 20.0
@@ -165,6 +169,7 @@ class BouncingSimulator:
     def move_right(self):
         if (self.my_paddle.location[0] + self.my_paddle.width/2 + 40) <= self.canvas_width:
             self.my_paddle.set_location([self.my_paddle.location[0] + 40, self.my_paddle.location[1]])
+
     ############### CUSTOM #######################################################################
     
     def move_up(self):
@@ -176,8 +181,9 @@ class BouncingSimulator:
         if (self.my_paddle.location[1] - self.my_paddle.height/2 - 40) >= -self.canvas_height:
             self.my_paddle.set_location([self.my_paddle.location[0], self.my_paddle.location[1]-40])
 
+    ############################################################################################## 
 
-    ##############################################################################################        
+    ############### CUSTOM #######################################################################       
     def show_time(self, num_hit):
         self.new_turtle.clear()
         self.new_turtle.hideturtle()
@@ -206,6 +212,8 @@ class BouncingSimulator:
         turtle.write("You Win!", align="center", font=("Arial", 30, "bold"))
         turtle.update()
         time.sleep(2)
+
+    ##############################################################################################
 
     def clear_ball(self):
         self.ball_list = []
@@ -268,6 +276,7 @@ class BouncingSimulator:
                 # print("ball b ",ball_b)
                 self.__redraw()
             elif (ball_a is not None) and (ball_b is None) and (paddle_a is not None) and str(paddle_a) == 'paddle':
+    ############### CUSTOM #######################################################################
                 ball_a.bounce_off_paddle()
                 num_hit += 1
                 if num_hit == 1:
@@ -346,7 +355,11 @@ class BouncingSimulator:
                     turtle.pencolor((255, 255, 255))
                     turtle.write("GAME OVER", align="center", font=("Arial", 30, "bold"))
                     turtle.done()
+    ##############################################################################################
+
             elif (ball_a is not None) and (ball_b is None) and (paddle_a is not None) and paddle_a == 'paddle_side':
+
+    ############### CUSTOM #######################################################################
                 ball_a.bounce_off_paddle_side()
                 print("hit the ball")
                 num_hit += 1
@@ -455,24 +468,24 @@ class BouncingSimulator:
                 is_stage_four = True
                 self.clear_ball()
                 self.pq = []
-                self.create_ball(3)
-                for i in range(len(self.ball_list)):
-                    self.__predict(self.ball_list[i])
-                heapq.heappush(self.pq, my_event.Event(self.t + 1.0/self.HZ, None, None, None))
-                self.__paddle_predict()
-
-            if time.time() - start_time >= 24 and is_final_stage == False:
-                self.game_clear()
-                is_final_stage = True
-                self.clear_ball()
-                self.pq = []
                 self.create_ball(4)
                 for i in range(len(self.ball_list)):
                     self.__predict(self.ball_list[i])
                 heapq.heappush(self.pq, my_event.Event(self.t + 1.0/self.HZ, None, None, None))
                 self.__paddle_predict()
+
+            if time.time() - start_time >= 26 and is_final_stage == False:
+                self.game_clear()
+                is_final_stage = True
+                self.clear_ball()
+                self.pq = []
+                self.create_ball(5)
+                for i in range(len(self.ball_list)):
+                    self.__predict(self.ball_list[i])
+                heapq.heappush(self.pq, my_event.Event(self.t + 1.0/self.HZ, None, None, None))
+                self.__paddle_predict()
                 turtle.done()
-           
+    ##############################################################################################
             self.__predict(ball_a)
             self.__predict(ball_b)
 
