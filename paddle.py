@@ -8,10 +8,12 @@ class Paddle:
         self.my_turtle.penup()
         self.my_turtle.setheading(0)
         self.my_turtle.hideturtle()
+        self.move_count = 0
 
     def set_location(self, location):
         self.location = location
         self.my_turtle.goto(self.location[0], self.location[1])
+        self.move_count += 1
 
     def draw(self):
         self.my_turtle.color(self.color)

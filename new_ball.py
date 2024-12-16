@@ -69,10 +69,10 @@ class BouncingSimulator:
             x = -self.canvas_width + (i+1)*(2*self.canvas_width/(self.num_balls+1))
             # y = 0.0
             y = 20
-            # vx = 10*random.uniform(-1.0, 1.0)
-            # vy = 10*random.uniform(-1.0, 1.0)
-            vx = 1.75
-            vy = 2
+            vx = 2*random.uniform(1.0, 4.0)
+            vy = 2*random.uniform(1.0, 4.0)
+            # vx = 2.5
+            # vy = 2.5
             ball_color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
             self.ball_list.append(ball.Ball(ball_radius, x, y, vx, vy, ball_color, i))
 
@@ -117,10 +117,10 @@ class BouncingSimulator:
         for i in range(self.num_balls):
             x = -self.canvas_width + (i+1)*(2*self.canvas_width/(self.num_balls+1))
             y = 20.0
-            # vx = 150*random.uniform(-0.50, 0.50)
-            # vy = 150*random.uniform(-0.50, 0.50)
-            vx = 1.75
-            vy = 2.25
+            vx = 2*random.uniform(1.0, 4.0)
+            vy = 2*random.uniform(1.0, 4.0)
+            # vx = 2.5
+            # vy = 2.5
             ball_color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
             self.ball_list.append(ball.Ball(ball_radius, x, y, vx, vy, ball_color, i))
 
@@ -151,22 +151,19 @@ class BouncingSimulator:
         for i in range(len(self.ball_list)):
             a_ball = self.ball_list[i]
             dtP = a_ball.time_to_hit_paddle(self.my_paddle)
-            dtP2 = a_ball.time_to_hit_paddle_side(self.my_paddle)
-            if(dtP != math.inf):
-                heapq.heappush(self.pq, my_event.Event(self.t + dtP, a_ball, None, self.my_paddle))
-            if(dtP2 != math.inf):
-                heapq.heappush(self.pq, my_event.Event(self.t + dtP2, a_ball, None, 'paddle_side'))
+            heapq.heappush(self.pq, my_event.Event(self.t + dtP, a_ball, None, self.my_paddle))
            
-
     # move_left and move_right handlers update paddle positions
     def move_left(self):
         if (self.my_paddle.location[0] - self.my_paddle.width/2 - 40) >= -self.canvas_width:
             self.my_paddle.set_location([self.my_paddle.location[0] - 40, self.my_paddle.location[1]])
+            self.__paddle_predict()
 
     # move_left and move_right handlers update paddle positions
     def move_right(self):
         if (self.my_paddle.location[0] + self.my_paddle.width/2 + 40) <= self.canvas_width:
             self.my_paddle.set_location([self.my_paddle.location[0] + 40, self.my_paddle.location[1]])
+            self.__paddle_predict()
 
     ############### CUSTOM #######################################################################
     
@@ -438,30 +435,30 @@ class BouncingSimulator:
                     turtle.write("GAME OVER", align="center", font=("Arial", 30, "bold"))
                     turtle.done()
 
-            if time.time() - start_time >= 8 and is_stage_two == False:
+            if time.time() - start_time >= 10 and is_stage_two == False:
                 self.stage_clear()
                 is_stage_two = True 
                 self.clear_ball()
                 self.num_balls += 1
-                self.pq = []
-                self.create_ball(3)
-                for i in range(len(self.ball_list)):
-                    self.__predict(self.ball_list[i])
-                heapq.heappush(self.pq, my_event.Event(self.t + 1.0/self.HZ, None, None, None))
-                self.__paddle_predict()
-            
-            if time.time() - start_time >= 18 and is_stage_three == False:
-                self.stage_clear()
-                is_stage_three = True
-                self.clear_ball()
                 self.pq = []
                 self.create_ball(5)
                 for i in range(len(self.ball_list)):
                     self.__predict(self.ball_list[i])
                 heapq.heappush(self.pq, my_event.Event(self.t + 1.0/self.HZ, None, None, None))
                 self.__paddle_predict()
+            
+            if time.time() - start_time >= 22 and is_stage_three == False:
+                self.stage_clear()
+                is_stage_three = True
+                self.clear_ball()
+                self.pq = []
+                self.create_ball(6)
+                for i in range(len(self.ball_list)):
+                    self.__predict(self.ball_list[i])
+                heapq.heappush(self.pq, my_event.Event(self.t + 1.0/self.HZ, None, None, None))
+                self.__paddle_predict()
 
-            if time.time() - start_time >= 28 and is_stage_four == False:
+            if time.time() - start_time >= 34 and is_stage_four == False:
                 self.stage_clear()
                 is_stage_four = True
                 self.clear_ball()
@@ -472,12 +469,12 @@ class BouncingSimulator:
                 heapq.heappush(self.pq, my_event.Event(self.t + 1.0/self.HZ, None, None, None))
                 self.__paddle_predict()
 
-            if time.time() - start_time >= 38 and is_final_stage == False:
+            if time.time() - start_time >= 46 and is_final_stage == False:
                 self.game_clear()
                 is_final_stage = True
                 self.clear_ball()
                 self.pq = []
-                self.create_ball(6)
+                self.create_ball(7)
                 for i in range(len(self.ball_list)):
                     self.__predict(self.ball_list[i])
                 heapq.heappush(self.pq, my_event.Event(self.t + 1.0/self.HZ, None, None, None))
@@ -494,7 +491,7 @@ class BouncingSimulator:
         turtle.done()
 
 # num_balls = int(input("Number of balls to simulate: "))
-num_balls = 2
+num_balls = 4
 my_simulator = BouncingSimulator(num_balls)
 start_time = time.time()
 my_simulator.run()

@@ -13,6 +13,10 @@ class Event:
             self.count_b = ball_b.count
         else:
             self.count_b = -1
+        if paddle is not None:
+            self.paddle_count = paddle.move_count
+        else:
+            self.paddle_count = -1
 
     def __lt__(self, that):
         return self.time < that.time
@@ -21,5 +25,7 @@ class Event:
         if (self.a is not None) and (self.a.count != self.count_a):
             return False
         if (self.b is not None) and (self.b.count != self.count_b):
+            return False
+        if (self.paddle is not None) and (self.paddle.move_count != self.paddle_count):
             return False
         return True
