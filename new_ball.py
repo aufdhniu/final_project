@@ -6,7 +6,7 @@ import heapq
 import player
 import time
 import math
-class BouncingSimulator:
+class NewGame:
     def __init__(self, num_balls):
         self.num_balls = num_balls
         self.ball_list = []
@@ -485,6 +485,6 @@ class BouncingSimulator:
 
 # num_balls = int(input("Number of balls to simulate: "))
 num_balls = 4
-my_simulator = BouncingSimulator(num_balls)
+my_simulator = NewGame(num_balls)
 start_time = time.time()
 my_simulator.run()

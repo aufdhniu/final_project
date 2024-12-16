@@ -23,7 +23,7 @@ class Ball:
 
 used for draw the ball and label how bouncing physics of the ball works
 
-class BouncingSimulator:
+class NewGame:
 
 our main work is here create star which is symbol of life point in the game (use self.TT) and will fill the color black when you get hit, also include the border of the game field, control the paddle (which I modified to make it be able to move up and down too), adjust the speed, amount of balls in one wave, including amount of wave itself.
 
