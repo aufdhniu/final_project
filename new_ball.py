@@ -14,7 +14,6 @@ class NewGame:
         self.pq = []
         self.HZ = 4
         self.new_turtle = turtle.Turtle()
-        # self.very_new_turtle = turtle.Turtle()
         self.color = (255, 0, 0)
         turtle.speed(0)
         turtle.tracer(0)
@@ -67,12 +66,9 @@ class NewGame:
         ball_radius = 0.04 * self.canvas_width
         for i in range(self.num_balls):
             x = -self.canvas_width + (i+1)*(2*self.canvas_width/(self.num_balls+1))
-            # y = 0.0
             y = 20
-            vx = 1.2*random.uniform(1.0, 4.0)
-            vy = 1.2*random.uniform(1.0, 4.0)
-            # vx = 2.5
-            # vy = 2.5
+            vx = 1*random.uniform(1.0, 4.0)
+            vy = 1*random.uniform(1.0, 4.0)
             ball_color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
             self.ball_list.append(ball.Ball(ball_radius, x, y, vx, vy, ball_color, i))
 
@@ -117,10 +113,8 @@ class NewGame:
         for i in range(self.num_balls):
             x = -self.canvas_width + (i+1)*(2*self.canvas_width/(self.num_balls+1))
             y = 20.0
-            vx = 1.2*random.uniform(1.0, 4.0)
-            vy = 1.2*random.uniform(1.0, 4.0)
-            # vx = 2.5
-            # vy = 2.5
+            vx = 1*random.uniform(1.0, 4.0)
+            vy = 1*random.uniform(1.0, 4.0)
             ball_color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
             self.ball_list.append(ball.Ball(ball_radius, x, y, vx, vy, ball_color, i))
 
@@ -176,12 +170,6 @@ class NewGame:
         self.new_turtle.goto(self.canvas_width - 55, self.canvas_height - 35)
         self.new_turtle.write(f"{time.time() - start_time:.0f} s.", font = ("Arial", 18, "normal"))
         self.new_turtle.pencolor(255, 255, 255)
-        # self.very_new_turtle.clear()
-        # self.very_new_turtle.hideturtle()
-        # self.very_new_turtle.penup()
-        # self.very_new_turtle.pencolor((255, 255, 255))
-        # self.very_new_turtle.setpos(self.canvas_width - 180, self.canvas_height - 35)
-        # self.very_new_turtle.write(f"{num_hit}")
     
     def stage_clear(self):
         turtle.penup()
