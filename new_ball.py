@@ -138,7 +138,9 @@ class BouncingSimulator:
         for i in range(len(self.ball_list)):
             a_ball = self.ball_list[i]
             dtP = a_ball.time_to_hit_paddle(self.my_paddle)
-            heapq.heappush(self.pq, my_event.Event(self.t + dtP, a_ball, None, self.my_paddle))
+            dtP2 = a_ball.time_to_hit_paddle_side(self.my_paddle)
+            heapq.heappush(self.pq, my_event.Event(self.t + dtP, a_ball, None, self.my_paddle,"paddle"))
+            heapq.heappush(self.pq, my_event.Event(self.t + dtP2, a_ball, None, self.my_paddle,"paddle_side"))
            
     # move_left and move_right handlers update paddle positions
     def move_left(self):
@@ -163,7 +165,7 @@ class BouncingSimulator:
       
         if (self.my_paddle.location[1] - self.my_paddle.height/2 - 40) >= -self.canvas_height:
             self.my_paddle.set_location([self.my_paddle.location[0], self.my_paddle.location[1]-40])
-            self.__paddle_predict
+            self.__paddle_predict()
 
     ############################################################################################## 
 
@@ -232,6 +234,8 @@ class BouncingSimulator:
             ball_a = e.a
             ball_b = e.b
             paddle_a = e.paddle
+            type_paddle = e.type
+            
          
             # update positions, and then simulation clock
             for i in range(len(self.ball_list)):
@@ -259,7 +263,7 @@ class BouncingSimulator:
                 # print("ball a ",ball_a)
                 # print("ball b ",ball_b)
                 self.__redraw()
-            elif (ball_a is not None) and (ball_b is None) and (paddle_a is not None) and str(paddle_a) == 'paddle':
+            elif (ball_a is not None) and (ball_b is None) and (paddle_a is not None) and type_paddle == 'paddle':
     ############### CUSTOM #######################################################################
                 ball_a.bounce_off_paddle()
                 num_hit += 1
@@ -341,7 +345,7 @@ class BouncingSimulator:
                     turtle.done()
     ##############################################################################################
 
-            elif (ball_a is not None) and (ball_b is None) and (paddle_a is not None) and paddle_a == 'paddle_side':
+            elif (ball_a is not None) and (ball_b is None) and (paddle_a is not None) and type_paddle == 'paddle_side':
 
     ############### CUSTOM #######################################################################
                 ball_a.bounce_off_paddle_side()

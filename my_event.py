@@ -1,6 +1,7 @@
 class Event:
-    def __init__(self, time, ball_a, ball_b, paddle):
+    def __init__(self, time, ball_a, ball_b, paddle, type = None):
         self.time = time
+        self.type = type
         self.a = ball_a
         self.b = ball_b
         self.paddle = paddle
