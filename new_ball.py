@@ -71,8 +71,8 @@ class BouncingSimulator:
             y = 20
             # vx = 10*random.uniform(-1.0, 1.0)
             # vy = 10*random.uniform(-1.0, 1.0)
-            vx = 1.2
-            vy = 1.2
+            vx = 1.75
+            vy = 2
             ball_color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
             self.ball_list.append(ball.Ball(ball_radius, x, y, vx, vy, ball_color, i))
 
@@ -119,8 +119,8 @@ class BouncingSimulator:
             y = 20.0
             # vx = 150*random.uniform(-0.50, 0.50)
             # vy = 150*random.uniform(-0.50, 0.50)
-            vx = 1.2
-            vy = 1.2
+            vx = 1.75
+            vy = 2.25
             ball_color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
             self.ball_list.append(ball.Ball(ball_radius, x, y, vx, vy, ball_color, i))
 
@@ -224,12 +224,12 @@ class BouncingSimulator:
 
         # listen to keyboard events and activate move_left and move_right handlers accordingly
         self.screen.listen()
-        self.screen.onkey(self.move_left, "Left")
-        self.screen.onkey(self.move_right, "Right")
+        self.screen.onkeypress(self.move_left, "Left")
+        self.screen.onkeypress(self.move_right, "Right")
 
         # custom #
-        self.screen.onkey(self.move_up, "Up")
-        self.screen.onkey(self.move_down, "Down")
+        self.screen.onkeypress(self.move_up, "Up")
+        self.screen.onkeypress(self.move_down, "Down")
         #############
         num_hit = 0
         is_stage_two = False
@@ -438,7 +438,7 @@ class BouncingSimulator:
                     turtle.write("GAME OVER", align="center", font=("Arial", 30, "bold"))
                     turtle.done()
 
-            if time.time() - start_time >= 7 and is_stage_two == False:
+            if time.time() - start_time >= 8 and is_stage_two == False:
                 self.stage_clear()
                 is_stage_two = True 
                 self.clear_ball()
@@ -450,20 +450,9 @@ class BouncingSimulator:
                 heapq.heappush(self.pq, my_event.Event(self.t + 1.0/self.HZ, None, None, None))
                 self.__paddle_predict()
             
-            if time.time() - start_time >= 16 and is_stage_three == False:
+            if time.time() - start_time >= 18 and is_stage_three == False:
                 self.stage_clear()
                 is_stage_three = True
-                self.clear_ball()
-                self.pq = []
-                self.create_ball(4)
-                for i in range(len(self.ball_list)):
-                    self.__predict(self.ball_list[i])
-                heapq.heappush(self.pq, my_event.Event(self.t + 1.0/self.HZ, None, None, None))
-                self.__paddle_predict()
-
-            if time.time() - start_time >= 25 and is_stage_four == False:
-                self.stage_clear()
-                is_stage_four = True
                 self.clear_ball()
                 self.pq = []
                 self.create_ball(5)
@@ -472,7 +461,18 @@ class BouncingSimulator:
                 heapq.heappush(self.pq, my_event.Event(self.t + 1.0/self.HZ, None, None, None))
                 self.__paddle_predict()
 
-            if time.time() - start_time >= 34 and is_final_stage == False:
+            if time.time() - start_time >= 28 and is_stage_four == False:
+                self.stage_clear()
+                is_stage_four = True
+                self.clear_ball()
+                self.pq = []
+                self.create_ball(7)
+                for i in range(len(self.ball_list)):
+                    self.__predict(self.ball_list[i])
+                heapq.heappush(self.pq, my_event.Event(self.t + 1.0/self.HZ, None, None, None))
+                self.__paddle_predict()
+
+            if time.time() - start_time >= 38 and is_final_stage == False:
                 self.game_clear()
                 is_final_stage = True
                 self.clear_ball()
@@ -494,7 +494,7 @@ class BouncingSimulator:
         turtle.done()
 
 # num_balls = int(input("Number of balls to simulate: "))
-num_balls = 1
+num_balls = 2
 my_simulator = BouncingSimulator(num_balls)
 start_time = time.time()
 my_simulator.run()
