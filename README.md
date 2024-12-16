@@ -17,7 +17,7 @@ Usage
 
 This is my uml diagram
 
- 	https://drive.google.com/file/d/1mmBuZKj3UMcYw37M1yjL7ipG1AIEND5a/view?usp=sharing
+	https://drive.google.com/file/d/19kyxf41qFctTdlqyG3jAud6Ae8pCxDN8/view?usp=sharing
 
 class Ball:
 
