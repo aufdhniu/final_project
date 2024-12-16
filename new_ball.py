@@ -3,7 +3,7 @@ import my_event
 import turtle
 import random
 import heapq
-import paddle
+import player
 import time
 import math
 class BouncingSimulator:
@@ -77,7 +77,7 @@ class BouncingSimulator:
             self.ball_list.append(ball.Ball(ball_radius, x, y, vx, vy, ball_color, i))
 
         tom = turtle.Turtle()
-        self.my_paddle = paddle.Paddle(40, 40, self.color, tom)
+        self.my_paddle = player.Paddle(40, 40, self.color, tom)
         self.my_paddle.set_location([0, -50])
 
         self.screen = turtle.Screen()
@@ -157,11 +157,13 @@ class BouncingSimulator:
     def move_up(self):
        if (self.my_paddle.location[1] + self.my_paddle.height/2 + 40) <= self.canvas_height:
             self.my_paddle.set_location([self.my_paddle.location[0], self.my_paddle.location[1]+40])
+            self.__paddle_predict()
     
     def move_down(self):
       
         if (self.my_paddle.location[1] - self.my_paddle.height/2 - 40) >= -self.canvas_height:
             self.my_paddle.set_location([self.my_paddle.location[0], self.my_paddle.location[1]-40])
+            self.__paddle_predict
 
     ############################################################################################## 
 
