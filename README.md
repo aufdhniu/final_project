@@ -12,7 +12,7 @@ How to install and run the project
 
 Usage
 
-	https://youtu.be/DCI6Qyw9zNE?si=GHmI58YdI4EN1DJR
+	https://www.youtube.com/watch?v=URofXZLTGXg
 
 
 This is my uml diagram
@@ -37,4 +37,4 @@ count the hit of object
 
 In first version that I uploaded, the player is able to get hit in left, right , up, down direction but there's a bug from heapq that make balls hit the air at the previous location or nearby, the conclusion that I come up is when the balls hit the wall, it'll predict that whether the ball will hit the player or not. If yes, then no matter it'll hit or not it still count as a hit (and the it get even worse since I make the ball be able to get hit by left and right side too). I manage to fix it but can't maintain the player's ability of getting on left and right side. (Latest version: I fixed the bug. Also, be able to hit the side of paddle without a bug too.)
 
-
+If I have to rate my project, I think I'll go for 90 because the player can get hit from every side.
