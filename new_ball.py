@@ -69,8 +69,8 @@ class BouncingSimulator:
             x = -self.canvas_width + (i+1)*(2*self.canvas_width/(self.num_balls+1))
             # y = 0.0
             y = 20
-            vx = 2*random.uniform(1.0, 4.0)
-            vy = 2*random.uniform(1.0, 4.0)
+            vx = 1.5*random.uniform(1.0, 4.0)
+            vy = 1.5*random.uniform(1.0, 4.0)
             # vx = 2.5
             # vy = 2.5
             ball_color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
@@ -117,8 +117,8 @@ class BouncingSimulator:
         for i in range(self.num_balls):
             x = -self.canvas_width + (i+1)*(2*self.canvas_width/(self.num_balls+1))
             y = 20.0
-            vx = 2*random.uniform(1.0, 4.0)
-            vy = 2*random.uniform(1.0, 4.0)
+            vx = 1.5*random.uniform(1.0, 4.0)
+            vy = 1.5*random.uniform(1.0, 4.0)
             # vx = 2.5
             # vy = 2.5
             ball_color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
@@ -133,19 +133,6 @@ class BouncingSimulator:
             self.ball_list[i].draw()
         turtle.update()
         heapq.heappush(self.pq, my_event.Event(self.t + 1.0/self.HZ, None, None, None))
-
-    def show_time(self, num_hit):
-        self.new_turtle.clear()
-        self.new_turtle.hideturtle()
-        self.new_turtle.setpos(self.canvas_width - 45, self.canvas_height - 35)
-        self.new_turtle.write(f"{time.time() - start_time:.0f} s.", font = ("Arial", 18, "normal"))
-        self.new_turtle.pencolor(255, 255, 255)
-        self.very_new_turtle.clear()
-        self.very_new_turtle.hideturtle()
-        self.very_new_turtle.penup()
-        self.very_new_turtle.pencolor((255, 255, 255))
-        self.very_new_turtle.setpos(self.canvas_width - 180, self.canvas_height - 35)
-        self.very_new_turtle.write(f"{num_hit}")
 
     def __paddle_predict(self):
         for i in range(len(self.ball_list)):

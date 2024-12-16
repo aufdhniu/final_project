@@ -24,15 +24,12 @@ class Ball:
         turtle.begin_fill()
         turtle.circle(self.size)
         turtle.end_fill()
-
     def bounce_off_vertical_wall(self):
         self.vx = -self.vx
         self.count += 1
-
     def bounce_off_horizontal_wall(self):
         self.vy = -self.vy
         self.count += 1
-
     def bounce_off(self, that):
         dx  = that.x - self.x
         dy  = that.y - self.y
@@ -40,24 +37,19 @@ class Ball:
         dvy = that.vy - self.vy
         dvdr = dx*dvx + dy*dvy; # dv dot dr
         dist = self.size + that.size   # distance between particle centers at collison
-
         # magnitude of normal force
         magnitude = 2 * self.mass * that.mass * dvdr / ((self.mass + that.mass) * dist)
-
         # normal force, and in x and y directions
         fx = magnitude * dx / dist
         fy = magnitude * dy / dist
-
         # update velocities according to normal force
         self.vx += fx / self.mass
         self.vy += fy / self.mass
         that.vx -= fx / that.mass
         that.vy -= fy / that.mass
-        
         # update collision counts
         self.count += 1
         that.count += 1
-
     def distance(self, that):
         x1 = self.x
         y1 = self.y
@@ -65,11 +57,9 @@ class Ball:
         y2 = that.y
         d = math.sqrt((y2-y1)**2 + (x2-x1)**2)
         return d
-
     def move(self, dt):
         self.x += self.vx*dt
         self.y += self.vy*dt
-
     def time_to_hit(self, that):
         if self is that:
             return math.inf
@@ -91,14 +81,11 @@ class Ball:
         if d < 0:
             return math.inf
         t = -(dvdr + math.sqrt(d)) / dvdv
-
         # should't happen, but seems to be needed for some extreme inputs
         # (floating-point precision when dvdv is close to 0, I think)
         if t <= 0:
             return math.inf
-
         return t
-
     def time_to_hit_vertical_wall(self):
         if self.vx > 0:
             return (self.canvas_width - self.x - self.size) / self.vx
@@ -127,7 +114,6 @@ class Ball:
             return dt
         else:
             return math.inf
-        
     def time_to_hit_paddle_side(self,paddle):
         if (self.vx > 0) and ((self.x + self.size) > (paddle.location[0] - paddle.height/2)):
             return math.inf
@@ -143,10 +129,8 @@ class Ball:
     def bounce_off_paddle(self):
         self.vy = -self.vy
         self.count += 1
-
     def bounce_off_paddle_side(self):
         self.vx = -self.vx
         self.count += 1
-
     def __str__(self):
         return str(self.x) + ":" + str(self.y) + ":" + str(self.vx) + ":" + str(self.vy) + ":" + str(self.count) + str(self.id)

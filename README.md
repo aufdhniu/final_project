@@ -30,3 +30,5 @@ our main work is here create star which is symbol of life point in the game (use
 class Paddle:
 
 use for create paddle (player) and set its location
+
+In first version that I uploaded, the player is able to get hit in left, right , up, down direction but there's a bug from heapq that make balls hit the air at the previous location or nearby, the conclusion that I come up is when the balls hit the wall(and the it get even worse since I make the ball be able to get hit by ) 

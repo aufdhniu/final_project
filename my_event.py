@@ -4,7 +4,6 @@ class Event:
         self.a = ball_a
         self.b = ball_b
         self.paddle = paddle
-
         if ball_a is not None:
             self.count_a = ball_a.count
         else:
